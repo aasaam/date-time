@@ -3,6 +3,7 @@
   "version": "0.0.7",
   "description": "aasaam date time",
   "main": "lib/AasaamDateTime.js",
+  "browser": "dist/AasaamDateTime.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aasaam/date-time.git"
@@ -42,6 +43,7 @@
     "@types/jest": "^26",
     "@types/node": "^14",
     "async": "^3",
+    "browserify": "^16.5.1",
     "cldr-cal-islamic-full": "^36",
     "cldr-cal-persian-full": "^36",
     "cldr-core": "^36",
