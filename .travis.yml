@@ -9,12 +9,12 @@ install:
   - npm run napa
 script:
   - export NODE_ICU_DATA=node_modules/full-icu/
+  - npm run lint
+  - npm run test:cover
   - ./tools/00_languages.js
   - ./tools/01_calendars.js
   - ./tools/02_defaultCountry.js
   - ./tools/03_preferredCalendars.js
   - ./tools/04_weekData.js
-  - ./tools/05_eventTypes.js
-  - npm run test:cover
-  - npm run lint
+  # - ./tools/05_eventTypes.js
   - cat ./coverage/lcov.info | coveralls
