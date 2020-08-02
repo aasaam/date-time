@@ -18,3 +18,7 @@ JavaScript library for process i18n base calendars. Include persian, islamic and
 ## Requirements
 
 Modern browser support [Intl](https://caniuse.com/#feat=mdn-javascript_builtins_intl).
+
+## Todo
+
+- [ ] Check events and translation
