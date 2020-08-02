@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    "sonarjs"
+  ],
+  "extends": [
+    "plugin:sonarjs/recommended",
+    "airbnb-base",
+    "prettier"
+  ],
+  "rules": {
+    "sonarjs/no-duplicate-string": "off"
+  }
+}
