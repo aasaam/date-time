@@ -298,11 +298,12 @@ declare class AasaamDateTime {
    * - `GGGG` _Epoch, localized, complete_ (**هجری شمسی**)
    * - `zzzz` _Time zone, NOT localized, complete_ (**Asia/Tehran**)
    *
+   * @param {string} format ISO format
    * @param {Language} language ISO 639-1 language code
    * @param {Calendar} calendar Calendar type
    * @return {string}
    */
-  public isoFormat(language?: Language, calendar?: Calendar = undefined): string;
+  public isoFormat(format: string, language?: Language = undefined, calendar?: Calendar = undefined): string;
 
   /**
    * Moment format
