@@ -186,4 +186,11 @@ describe('AasaamDateTime', () => {
       });
     }
   });
+
+  it('samples', () => {
+    // const ad = new AasaamDateTime(new Date('2021-03-20 12:00:00'), 'fa');
+    const ad = new AasaamDateTime();
+    // console.log(ad.isoFormatObject());
+    console.log(ad.isoFormat('EEEE d MMMM YYYY HH:mm'));
+  });
 });
