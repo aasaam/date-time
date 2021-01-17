@@ -1,6 +1,6 @@
 {
   "name": "@aasaam/date-time",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "aasaam date time",
   "main": "lib/AasaamDateTime.js",
   "types": "AasaamDateTime.d.ts",
