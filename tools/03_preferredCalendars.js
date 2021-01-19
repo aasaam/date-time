@@ -7,7 +7,12 @@ const { uniq } = require('lodash');
 
 const PROJECT_DIR = resolve(__dirname, '..');
 
-const unicodeData = JSON.parse(fs.readFileSync(`${PROJECT_DIR}/node_modules/cldr-core/supplemental/calendarPreferenceData.json`, { encoding: 'utf8' }));
+const unicodeData = JSON.parse(
+  fs.readFileSync(
+    `${PROJECT_DIR}/node_modules/cldr-core/supplemental/calendarPreferenceData.json`,
+    { encoding: 'utf8' },
+  ),
+);
 
 const { calendarPreferenceData } = unicodeData.supplemental;
 
@@ -17,22 +22,23 @@ Object.keys(calendarPreferenceData).forEach((code) => {
   if (!code.match(/^[A-Z]{2}$/)) {
     return;
   }
-  const calendars = uniq(calendarPreferenceData[code].split(' ').map((cal) => {
-    if (cal === 'gregorian') {
-      return 'g';
-    }
-    if (cal === 'persian') {
-      return 'p';
-    }
-    if (cal.match('islamic')) {
-      return 'i';
-    }
-    return false;
-  }).filter((c) => c));
+  const calendars = uniq(
+    calendarPreferenceData[code]
+      .split(' ')
+      .map((cal) => {
+        if (cal === 'gregorian') {
+          return 'g';
+        }
+        if (cal === 'persian') {
+          return 'p';
+        }
+        return false;
+      })
+      .filter((c) => c),
+  );
 
   matched[code] = calendars;
 });
-
 
 const sortedMatched = Object.keys(matched)
   .sort()
@@ -43,6 +49,10 @@ const sortedMatched = Object.keys(matched)
 
 const preferredCalendarsPath = `${PROJECT_DIR}/lib/preferredCalendars.js`;
 
-fs.writeFileSync(preferredCalendarsPath, `module.exports = ${JSON.stringify(sortedMatched)}`);
-execSync(`${PROJECT_DIR}/node_modules/.bin/prettier --write ${preferredCalendarsPath}`);
-
+fs.writeFileSync(
+  preferredCalendarsPath,
+  `module.exports = ${JSON.stringify(sortedMatched)}`,
+);
+execSync(
+  `${PROJECT_DIR}/node_modules/.bin/prettier --write ${preferredCalendarsPath}`,
+);

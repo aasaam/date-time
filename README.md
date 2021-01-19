@@ -11,14 +11,11 @@
 [![open-issues](https://flat.badgen.net/github/open-issues/aasaam/date-time)](https://github.com/aasaam/date-time/issues)
 [![open-pull-requests](https://flat.badgen.net/github/open-prs/aasaam/date-time)](https://github.com/aasaam/date-time/pulls)
 [![npm](https://flat.badgen.net/npm/v/@aasaam/date-time)](https://www.npmjs.com/package/@aasaam/date-time)
+[![types](https://flat.badgen.net/npm/types/@aasaam/information)](https://www.npmjs.com/package/@aasaam/information)
 [![license](https://flat.badgen.net/github/license/aasaam/date-time)](./LICENSE)
 
-JavaScript library for process i18n base calendars. Include persian, islamic and gregorian.
+JavaScript library for process i18n base calendars. Include persian and gregorian.
 
 ## Requirements
 
 Modern browser support [Intl](https://caniuse.com/#feat=mdn-javascript_builtins_intl).
-
-## Todo
-
-- [ ] Check events and translation

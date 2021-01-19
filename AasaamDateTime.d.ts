@@ -1,9 +1,8 @@
 import { Moment as MomentGeorgian } from 'moment';
-import { Moment as MomentHijri } from 'moment-hijri';
 import { Moment as MomentJalaali } from 'moment-jalaali';
 
 // Calendar supported types
-type Calendar = 'i' | 'p' | 'g';
+type Calendar = 'p' | 'g';
 
 // ISO 639-1 language code
 type Language = 'ar' | 'az' | 'bn' | 'de' | 'en' | 'es' | 'fa' | 'fr' | 'hi' | 'id' | 'it' | 'ja' | 'ko' | 'ku' | 'nl' | 'pl' | 'ps' | 'pt' | 'ru' | 'sw' | 'tr' | 'ur' | 'zh';
@@ -49,28 +48,8 @@ type MonthItem = {
   date: Date,
 };
 
-type EventItem = {
-  title: {
-    [key: Language]: string;
-  },
-  holiday: {
-    [key: string]: boolean,
-  },
-  year: number,
-};
-
-type Events = {
-  [key: string]: EventItem[]
-};
-
-type EventKey = {
-  key: string,
-  yearNumber: number,
-};
-
 type SpecialDay = {
   calendar: string,
-  eventKeys: EventKey[],
   dayLocale: string,
   dayNative: string,
   monthName: string,
@@ -108,7 +87,6 @@ type DayInMonth = {
   weekSeq: number,
   weekend: boolean,
   selected: boolean,
-  events: DayEvent[],
 };
 
 type MonthWeekDays = {
@@ -133,16 +111,6 @@ type MonthWeeksTable = {
 };
 
 declare class AasaamDateTime {
-  /**
-   * Get event key base on calendar, month and day
-   *
-   * @param {Calendar} calendar Calendar type
-   * @param {number|string} month Month number between 1 to 12
-   * @param {number|string} day Day number between 1 to 31
-   * @return {string}
-   */
-  static public getEventKey(calendar: Calendar, month: number | string, day: number | string): string;
-
   /**
    * IANA timezone
    *
@@ -274,38 +242,6 @@ declare class AasaamDateTime {
   public isoFormatObject(language?: Language = undefined, calendar?: Calendar = undefined): ISOFormatObject;
 
   /**
-   * ISO format
-   *
-   * Return string base of format of ISO 8601 Date
-   * - `H` _Hour, (0-23), one or two digit_ (**۴**)
-   * - `HH` _Hour, (00-23), two digit_ (**۰۴**)
-   * - `m` _Minute, (0-59), one or two digit_ (**۵**)
-   * - `mm` _Minute, (00-59), two digit_ (**۰۵**)
-   * - `s` _Second, (0-59), one or two digit_ (**۶**)
-   * - `ss` _Second, (00-59), two digit_ (**۰۶**)
-   * - `YYYY` _Year according to ISO 8601, at least four digit_ (**۱۳۸۰**)
-   * - `YY` _Year according to ISO 8601, at least two digit_ (**۸۰**)
-   * - `MMMM` _Month, localized, complete_ (**اردیبهشت**)
-   * - `MM` _Month, two digit_ (**۰۲**)
-   * - `M` _Month, one or two digit_ (**۲**)
-   * - `d` _Day of the month, one or two digit_ (**۹**)
-   * - `dd` _Day of the month, two digit_ (**۰۹**)
-   * - `E` _Day of the week, localized, number, one char_ (**۱**)
-   * - `EEEE` _Day of the week, localized, complete_ (**یکشنبه**)
-   * - `EE` _Day of the week, localized, abbreviated, one char_ (**ی**)
-   * - `e` _Day of the week, Sunday 0 to Saturday 6_ (**0**)
-   * - `G` _Epoch, localized, abbreviated_ (**ه‍.ش.**)
-   * - `GGGG` _Epoch, localized, complete_ (**هجری شمسی**)
-   * - `zzzz` _Time zone, NOT localized, complete_ (**Asia/Tehran**)
-   *
-   * @param {string} format ISO format
-   * @param {Language} language ISO 639-1 language code
-   * @param {Calendar} calendar Calendar type
-   * @return {string}
-   */
-  public isoFormat(format: string, language?: Language = undefined, calendar?: Calendar = undefined): string;
-
-  /**
    * Moment format
    *
    * @param {string} format Strong contain ISO 8601 formats
@@ -346,23 +282,20 @@ declare class AasaamDateTime {
 
   /**
    * @param {Calendar[]} calendarList Calendar type
-   * @param {boolean} addEvents Add
    * @return {MonthWeekDays}
    */
-  public generateMonthWeekDays(calendarList: Calendar[] = [], addEvents: boolean = false): MonthWeekDays
+  public generateMonthWeekDays(calendarList: Calendar[] = []): MonthWeekDays
 
   /**
    * @param {Calendar[]} calendarList Calendar type
-   * @param {boolean} addEvents Add
    * @return {MonthWeeksTable}
    */
-  public generateMonthWeekTable(calendarList: Calendar[] = [], addEvents: boolean = false): MonthWeeksTable
+  public generateMonthWeekTable(calendarList: Calendar[] = []): MonthWeeksTable
 }
 
 export const momentG: MomentGeorgian;
 export const momentH: MomentHijri;
 export const momentJ: MomentJalaali;
-export const events: Events;
 export const languages: Language[];
 export const preferredCalendars: PreferredCalendars;
 export const CALENDAR_TYPE_GREGORIAN: string = 'g';

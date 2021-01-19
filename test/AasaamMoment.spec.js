@@ -7,27 +7,12 @@ const {
   languages,
   CALENDAR_TYPE_GREGORIAN,
   CALENDAR_TYPE_PERSIAN,
-  CALENDAR_TYPE_ISLAMIC,
 } = require('../lib/AasaamDateTime');
 
 const calFormats = ['YY', 'iYY', 'jYY'];
 
 describe('AasaamDateTime', () => {
-  const calendars = [
-    CALENDAR_TYPE_GREGORIAN,
-    CALENDAR_TYPE_PERSIAN,
-    CALENDAR_TYPE_ISLAMIC,
-  ];
-  it('getEventKey', () => {
-    calendars.forEach((c) => {
-      const mNum = Math.floor(Math.random() * 12) + 1;
-      const dNum = Math.floor(Math.random() * 31) + 1;
-      expect(AasaamDateTime.getEventKey(c, mNum, dNum)).toBeTruthy();
-      expect(
-        AasaamDateTime.getEventKey(c, mNum.toString(), dNum.toString()),
-      ).toBeTruthy();
-    });
-  });
+  const calendars = [CALENDAR_TYPE_GREGORIAN, CALENDAR_TYPE_PERSIAN];
   it('getSupportedLanguages', () => {
     expect(languages).toBeTruthy();
   });
@@ -116,7 +101,7 @@ describe('AasaamDateTime', () => {
     ad.generateMonthWeekDays(undefined, true);
     ad = new AasaamDateTime(new Date('2021-01-17 12:00:00'), 'fa');
     ad.generateMonthWeekDays(
-      [CALENDAR_TYPE_GREGORIAN, CALENDAR_TYPE_ISLAMIC, CALENDAR_TYPE_PERSIAN],
+      [CALENDAR_TYPE_GREGORIAN, CALENDAR_TYPE_PERSIAN],
       true,
     );
     ad = new AasaamDateTime(new Date('2021-01-17 12:00:00'), 'de');
@@ -126,7 +111,6 @@ describe('AasaamDateTime', () => {
     ad.generateYearList();
     ad.generateMonthList();
     calFormats.forEach((f) => {
-      ad.isoFormat(f);
       ad.momentFormat(f);
     });
     calendars.forEach((c) => {
@@ -164,7 +148,6 @@ describe('AasaamDateTime', () => {
         calendars.forEach((c) => {
           ad.momentParse('12', 'H', c);
           ad.isoFormatObject(l, c);
-          ad.isoFormat(f, l, c);
         });
       });
     });
@@ -185,12 +168,5 @@ describe('AasaamDateTime', () => {
         ad.getMoment(cal);
       });
     }
-  });
-
-  it('samples', () => {
-    // const ad = new AasaamDateTime(new Date('2021-03-20 12:00:00'), 'fa');
-    const ad = new AasaamDateTime();
-    // console.log(ad.isoFormatObject());
-    console.log(ad.isoFormat('EEEE d MMMM YYYY HH:mm'));
   });
 });

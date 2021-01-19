@@ -5,10 +5,13 @@ const { execSync } = require('child_process');
 
 const languages = require('../lib/languages');
 
-
 const PROJECT_DIR = resolve(__dirname, '..');
 
-const caGregorian = JSON.parse(fs.readFileSync(`${PROJECT_DIR}/node_modules/cldr-core/defaultContent.json`, { encoding: 'utf8' }));
+const caGregorian = JSON.parse(
+  fs.readFileSync(`${PROJECT_DIR}/node_modules/cldr-core/defaultContent.json`, {
+    encoding: 'utf8',
+  }),
+);
 
 const founded = [];
 const matched = {};
@@ -22,10 +25,10 @@ caGregorian.defaultContent.forEach((locale) => {
   }
 });
 
-const notFounded = languages.filter(x => !founded.includes(x));
+const notFounded = languages.filter((x) => !founded.includes(x));
 const specials = ['ar', 'az', 'zh'];
-const diff1 = notFounded.filter(x => !specials.includes(x));
-const diff2 = specials.filter(x => !notFounded.includes(x));
+const diff1 = notFounded.filter((x) => !specials.includes(x));
+const diff2 = specials.filter((x) => !notFounded.includes(x));
 
 if (diff1.length !== 0 || diff2.length !== 0) {
   throw new Error('Special not match well');
@@ -44,6 +47,10 @@ const sortedMatched = Object.keys(matched)
 
 const defaultCountryPath = `${PROJECT_DIR}/lib/defaultCountry.js`;
 
-fs.writeFileSync(defaultCountryPath, `module.exports = ${JSON.stringify(sortedMatched)}`);
-execSync(`${PROJECT_DIR}/node_modules/.bin/prettier --write ${defaultCountryPath}`);
-
+fs.writeFileSync(
+  defaultCountryPath,
+  `module.exports = ${JSON.stringify(sortedMatched)}`,
+);
+execSync(
+  `${PROJECT_DIR}/node_modules/.bin/prettier --write ${defaultCountryPath}`,
+);
