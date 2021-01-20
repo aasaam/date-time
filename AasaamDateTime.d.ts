@@ -183,6 +183,11 @@ declare class AasaamDateTime {
   public changeCountry(country: string): AasaamDateTime
 
   /**
+   * @return {string}
+   */
+  public getCountry(): string
+
+  /**
    * @param {Calendar} calendar Calendar type
    * @return {MomentGeorgian|MomentHijri|MomentJalaali}
    */

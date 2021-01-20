@@ -90,22 +90,20 @@ describe('AasaamDateTime', () => {
 
   it('methods', () => {
     const ad = new AasaamDateTime(new Date('2021-03-21 12:00:00'), 'fa');
-    ad.generateMonthWeekDays(undefined, true);
-    ad.generateMonthWeekTable(undefined, true);
+    expect(ad.getCountry()).toBe('IR');
+    ad.generateMonthWeekDays(undefined);
+    ad.generateMonthWeekTable(undefined);
   });
 
   it('methods', () => {
     let ad;
     ad = new AasaamDateTime();
     ad = new AasaamDateTime(new Date('2021-01-27 12:00:00'), 'fa');
-    ad.generateMonthWeekDays(undefined, true);
+    ad.generateMonthWeekDays(undefined);
     ad = new AasaamDateTime(new Date('2021-01-17 12:00:00'), 'fa');
-    ad.generateMonthWeekDays(
-      [CALENDAR_TYPE_GREGORIAN, CALENDAR_TYPE_PERSIAN],
-      true,
-    );
+    ad.generateMonthWeekDays([CALENDAR_TYPE_GREGORIAN, CALENDAR_TYPE_PERSIAN]);
     ad = new AasaamDateTime(new Date('2021-01-17 12:00:00'), 'de');
-    ad.generateMonthWeekDays([CALENDAR_TYPE_GREGORIAN], true);
+    ad.generateMonthWeekDays([CALENDAR_TYPE_GREGORIAN]);
     ad.isoFormatObject();
     ad.generateYearList(undefined, 1);
     ad.generateYearList();
@@ -117,9 +115,7 @@ describe('AasaamDateTime', () => {
       ad.generateYearList(c);
       ad.generateMonthList(c);
       ad.generateMonthWeekDays([c]);
-      ad.generateMonthWeekDays([c], true);
       ad.generateMonthWeekTable();
-      ad.generateMonthWeekTable([c], true);
       ad.getAlternateCalendarData(new Date(), c);
     });
 
